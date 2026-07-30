@@ -1,0 +1,104 @@
+.header
+{
+    height: 150px;
+}
+
+.header-1
+{
+    border:1px solid palevioletred;
+    height:66px;
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
+    
+}
+
+.header-1-left-logo
+{
+ display: flex;
+ align-items:center;
+ gap: 40px;
+}
+
+.logo-home
+{
+    width: 20px;
+    height: 20px;
+}
+
+
+.logo
+{
+    width:50px;
+    height:30px;
+    padding:15px;
+}
+
+
+
+
+.header-2
+ {
+   height: 65px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center; 
+   
+}
+
+
+
+
+.input-search
+{
+    height:44px;
+    border:1px solid rgb(3, 225, 233);
+    border-radius:15px;
+    margin-left: 25px;
+    padding:4px;
+    width: 845px;
+    
+}
+
+
+.user-div
+{
+    display:flex;
+    justify-content:start;
+    align-items: center;
+}
+
+
+.user-icon,.card-icon,.more-icon
+{
+    padding: 15px;
+}
+
+
+.suggestion-box
+{
+    position: absolute;
+    width: 845px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    list-style: none;
+    padding: 10px;
+    margin:0px 20px;
+    max-height: 250px;
+
+}
+
+.sugestion-item
+{
+    height:25px; 
+    display: flex;
+    align-items: center;
+    padding:5px;
+}
+
+.sugestion-img 
+{
+    object-fit: fill;
+    width: 30px; 
+}
