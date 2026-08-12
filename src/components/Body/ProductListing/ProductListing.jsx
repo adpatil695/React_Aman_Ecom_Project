@@ -1,17 +1,39 @@
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import './ProductListing.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Header } from '../../Header/Header'
-
+import throttle from 'lodash/throttle'
 
 export const ProductListing = () => {
+  //------------------------------ Without Throttle (JS) ----------------------------
+
+  // const handleScroll = () => {
+  //   console.log('Scrolling...')
+  // }
+
+  // window.addEventListener('scroll', handleScroll)
+
+  //---------------------------
+  const handleScroll = () => {
+    console.log('throttle@@', window.scrollY)
+  }
+
+  useEffect(() => {
+    const throttledScroll = throttle(handleScroll, 500)
+
+    window.addEventListener('scroll', throttledScroll)
+
+    return () => {
+      window.removeEventListener('scroll', throttledScroll)
+    }
+  }, [])
+
   // -----------------------------------------------
 
   const { cateValue } = useParams()
   const location = useLocation()
   let filterData = [...location.state.productData]
   filterData = filterData.filter((item) => item.category == cateValue)
-console.log('Produlisting page filterData',filterData)
 
   // ------------------Sort Price-----------------------------
   const [sortPriceNav, setSortPriceNav] = useState('')
@@ -24,10 +46,6 @@ console.log('Produlisting page filterData',filterData)
     filterData = [...filterData].sort((p, q) => q.price - p.price)
   }
 
-
-
-
-
   // ------------------ Rating sort -----------------------------
   const [sort_Rating_Nav, setSort_Rating_Nav] = useState('')
 
@@ -37,9 +55,6 @@ console.log('Produlisting page filterData',filterData)
   if (sort_Rating_Nav == 'HtoL') {
     filterData = [...filterData].sort((p, q) => q.rating - p.rating)
   }
-
-
-
 
   //-------------------Filter tage add & remove-----------------------------
   const [selectedFilters, setSelectedFilters] = useState([])
@@ -135,25 +150,31 @@ console.log('Produlisting page filterData',filterData)
     }
   }
 
-  if (discountValue !== '') 
-    {
+  if (discountValue !== '') {
     filterData = filterData.filter(
       (item) =>
         item.discountPercentage >= discountValue &&
         item.discountPercentage < discountValue + 4,
     )
   }
+
+  //------------------- handleProductDetailC ---------------------------------------
+   const navigate=useNavigate()
  
+   
+  const handleProductDetail = (item) => {
+     navigate(`/ProductDetail/${item.id}`)
+   }
+    
 
+  //------------------------------------------------------
 
-//------------------------------------------------------
-
-
+  console.log('product listing page', filterData)
   return (
     <>
-    <Header/>
-      <div className='main'>
-        {/* filter section */}
+      <Header />
+      <div className="main">
+        {/* -------filter section----------- */}
         <div className="main-filter-section">
           <div className="filter-header">
             <h3>Filters</h3>
@@ -296,8 +317,13 @@ console.log('Produlisting page filterData',filterData)
               </span>
             </p>
           </div>
+
           {filterData.map((item) => (
-            <div className="carts-product" key={item.id}>
+            <div
+              className="carts-product"
+              key={item.id}
+              onClick={()=>handleProductDetail(item)}
+            >
               {<img className="imgs-product" src={item.thumbnail} />}
               <div className="list-product">
                 <span className="title-product">{item.title} </span>

@@ -30,6 +30,7 @@ export const Category = () =>
 
 // const dis =productData.map((item) => Math.max(item.discountPercentage))
 // console.log('disc',Math.min(...dis))
+console.log('category page data', uniqueProducts)
 
   return (
     <>

@@ -1,7 +1,22 @@
+
+
+.dark {
+    background-color: black;
+    color: white;
+}
+
+.light {
+    background-color: white;
+    color: black;
+}
+
+
+
 .header
 {
     height: 150px;
 }
+
 
 .header-1
 {
@@ -74,12 +89,17 @@
     padding: 15px;
 }
 
+.cart-link-prop
+{
+    text-decoration:none;
+    color:black;
+}
 
 .suggestion-box
 {
     position: absolute;
     width: 845px;
-    background: white;
+   
     border: 1px solid #ddd;
     border-radius: 15px;
     list-style: none;
